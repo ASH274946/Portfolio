@@ -13,5 +13,4 @@ I'm an intermediate developer committed to building efficient, responsive, and d
 
 ---
 Reach me at: **koothedhulaa@gmail.com**
-LinkedIn: **ash274946 (https://www.linkedin.com/in/ash274946/)**
-GitHub: **ASH274946 (https://github.com/ASH274946)**
+LinkedIn: [ash274946](https://www.linkedin.com/in/ash274946/)
