@@ -536,13 +536,23 @@
 
 
                 <!-- Skills Section -->
-                <div id="skills-section" class="lg:col-span-12 relative mt-64 scroll-mt-24 pt-10">
+                <div id="skills-section" class="lg:col-span-12 relative scroll-mt-24 pt-10">
                     <!-- Background Text Layer -->
-                    <div class="absolute top-[-8rem] left-0 z-0 pointer-events-none select-none opacity-20 px-8 py-4">
+                    <div class="absolute top-10 left-0 z-0 pointer-events-none select-none opacity-20 px-8 py-4">
                         <h2
                             class="font-display font-black text-[11vw] leading-none tracking-tighter uppercase text-[#334155] dark:text-[#94a3b8] whitespace-nowrap">
                             MY SKILLS.
                         </h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 pt-16">
+                        <div class="lg:col-span-12 about-content-left mb-12 px-4">
+                            <div class="max-w-3xl border-l-[4px] border-primary pl-10 py-2">
+                                <p class="text-xl md:text-2xl text-primary font-medium tracking-tight opacity-90 italic">
+                                    "The skills? My skills are first developing something that makes sense, chasing loopholes, fixing bugs & errors and finally delivering an efficient product."
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
                     <div
@@ -828,8 +838,6 @@
         const about = document.getElementById('about-section');
         const slidingRows = document.querySelectorAll('.sliding-text-row');
         const gridLines = document.querySelector('.grid-lines');
-        const aboutLeft = document.querySelector('.about-content-left');
-        const aboutRight = document.querySelector('.about-content-right');
 
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
@@ -868,14 +876,16 @@
             const aboutOpacity = aboutProgress;
             const aboutOffset = (1 - aboutProgress) * 60;
 
-            if (aboutLeft) {
-                aboutLeft.style.opacity = aboutOpacity;
-                aboutLeft.style.transform = `translateX(${-aboutOffset}px)`;
-            }
-            if (aboutRight) {
-                aboutRight.style.opacity = aboutOpacity;
-                aboutRight.style.transform = `translateX(${aboutOffset}px)`;
-            }
+            const aboutLefts = document.querySelectorAll('.about-content-left');
+            aboutLefts.forEach(el => {
+                el.style.opacity = aboutOpacity;
+                el.style.transform = `translateX(${-aboutOffset}px)`;
+            });
+            const aboutRights = document.querySelectorAll('.about-content-right');
+            aboutRights.forEach(el => {
+                el.style.opacity = aboutOpacity;
+                el.style.transform = `translateX(${aboutOffset}px)`;
+            });
 
             // 5. Navigation Bar Detach
             const nav = document.getElementById('main-nav');
