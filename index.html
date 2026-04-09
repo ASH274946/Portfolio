@@ -278,6 +278,120 @@
             border: 1px solid rgba(255, 255, 255, 0.05) !important;
             box-shadow: 0 20px 50px -12px rgba(0,0,0,0.5);
         }
+
+        /* Project Section Specific Styles */
+        .project-card-transition {
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mockup-layer {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dot-indicator {
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .tech-badge:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 17, 17, 0.3);
+        }
+
+        .action-btn {
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            box-shadow: 0 0 20px rgba(255, 17, 17, 0.4);
+        }
+
+        .projects-header-fade {
+            will-change: transform, opacity;
+            transform: translateY(40px);
+            opacity: 0;
+        }
+
+        .projects-content-fade {
+            will-change: transform, opacity;
+            transform: translateY(60px);
+            opacity: 0;
+        }
+
+        /* Mockup Layering Effect */
+        .mockup-main {
+            z-index: 30;
+            transform: translateX(0) scale(1);
+            opacity: 1;
+        }
+
+        .mockup-behind-left {
+            z-index: 20;
+            transform: translateX(-30px) scale(0.9) rotate(-3deg);
+            opacity: 0.4;
+            filter: brightness(0.5) blur(1px);
+        }
+
+        .mockup-behind-right {
+            z-index: 10;
+            transform: translateX(30px) scale(0.9) rotate(3deg);
+            opacity: 0.4;
+            filter: brightness(0.3) blur(2px);
+        }
+
+        .mockup-hidden {
+            display: none;
+        }
+
+        .folder-tab-svg {
+            position: absolute;
+            left: -2px;
+            top: 0;
+            width: 55px;
+            height: 100%;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+
+        .folder-tab {
+            position: relative;
+            height: 100px;
+            width: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .folder-tab span {
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+            font-family: inherit;
+            pointer-events: none;
+        }
+
+        .folder-tab.active .folder-tab-svg path {
+            fill: rgba(255, 255, 255, 0.08); /* Match container bg */
+            stroke: rgba(255, 255, 255, 0.1);
+        }
+
+        .folder-tab:not(.active) .folder-tab-svg path {
+            fill: rgba(0, 0, 0, 0.4);
+            stroke: rgba(255, 255, 255, 0.1);
+        }
+
+        .folder-tab.active {
+            z-index: 30;
+        }
+
+        .folder-tab:hover:not(.active) .folder-tab-svg path {
+            fill: rgba(255, 255, 255, 0.04);
+        }
+    </style>
     </style>
 </head>
 
@@ -812,8 +926,8 @@
     </div>
 
     <!-- Projects Section -->
-    <div id="projects-section" class="relative z-30 pt-[calc(2.5rem+20px)] pb-32 px-8 overflow-hidden scroll-mt-24">
-        <div class="max-w-[95rem] mx-auto relative">
+    <div id="projects-section" class="relative z-[30] pt-[calc(2.5rem+20px)] pb-32 px-8 scroll-mt-24">
+        <div class="max-w-[95rem] mx-auto relative px-0">
             <div class="relative pt-10">
                 <!-- Background Text Layer -->
                 <div class="absolute top-10 left-0 z-0 pointer-events-none select-none opacity-20 px-8 py-4">
@@ -823,8 +937,8 @@
                     </h2>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 pt-16">
-                    <div class="lg:col-span-12 about-content-left mb-12 px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 pt-16 projects-header-fade">
+                    <div class="lg:col-span-12 mb-12 px-4">
                         <div class="max-w-3xl border-l-[4px] border-primary pl-10 py-2">
                             <p class="text-xl md:text-2xl text-primary font-medium tracking-tight opacity-90 italic">
                                 "Projects that I've built & worked on, gained some experience on how few things works &
@@ -834,36 +948,109 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 gap-12 relative z-10">
-                    <div
-                        class="relative z-10 about-content-right bg-white/5 backdrop-blur-sm p-12 rounded-2xl border border-white/10 shadow-2xl w-full">
-                        <!-- Two-Column Layout -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[6fr_4fr] gap-8 lg:gap-10">
-                            <!-- Left Column (60% Desktop) - Mockups -->
-                            <div
-                                class="flex flex-col w-full h-full min-h-[300px] bg-white/5 rounded-xl border border-white/10 items-center justify-center">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 projects-content-fade">
+                    <div class="lg:col-span-12 relative group w-full">
+                        <!-- Vertical Chrome-Style Tabs (Right Edge, Top-Aligned) -->
+                        <div class="absolute top-0 right-[-53px] flex flex-col w-[55px] gap-0 z-20">
+                            <!-- Fillora Tab -->
+                            <div onclick="switchProject(0)" id="tab-fillora" class="folder-tab active">
+                                <svg class="folder-tab-svg" viewBox="0 0 55 100" preserveAspectRatio="none">
+                                    <path d="M0,0 L45,0 C50,0 55,5 55,10 L55,90 C55,95 50,100 45,100 L0,100" fill="none"
+                                        stroke-width="1" />
+                                </svg>
                                 <span
-                                    class="text-gray-400 font-mono text-sm uppercase tracking-widest text-center px-4">Mockup
-                                    / Carousel Area</span>
+                                    class="text-[10px] font-mono tracking-widest uppercase font-bold text-white">Fillora</span>
                             </div>
-
-                            <!-- Right Column (40% Desktop) - Information -->
-                            <div class="flex flex-col justify-center">
+                            <!-- ExamEase Tab -->
+                            <div onclick="switchProject(1)" id="tab-examease" class="folder-tab">
+                                <svg class="folder-tab-svg" viewBox="0 0 55 100" preserveAspectRatio="none">
+                                    <path d="M0,0 L45,0 C50,0 55,5 55,10 L55,90 C55,95 50,100 45,100 L0,100" fill="none"
+                                        stroke-width="1" />
+                                </svg>
                                 <span
-                                    class="text-xs font-mono uppercase tracking-[0.3em] text-primary font-bold mb-3">Featured
-                                    Project</span>
-                                <h3
-                                    class="text-3xl md:text-4xl lg:text-5xl font-display font-black tracking-tighter text-white mb-6">
-                                    PROJECT TITLE</h3>
-                                <p class="text-gray-300 leading-relaxed mb-8">
-                                    Project description goes here. This section is designed to hold the details, tech
-                                    stack, and links associated with the featured project mockups shown on the left.
-                                </p>
-                                <div class="flex gap-4">
-                                    <button
-                                        class="px-8 py-3 bg-primary text-white font-bold tracking-widest uppercase text-xs rounded-full hover:scale-105 transition-transform duration-300">
-                                        View Case Study
-                                    </button>
+                                    class="text-[10px] font-mono tracking-widest uppercase font-bold text-white/40">ExamEase</span>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white/5 backdrop-blur-sm p-12 rounded-2xl border border-white/10 shadow-2xl relative z-20">
+                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                                <!-- Left Column: Carousel -->
+                                <div
+                                    class="lg:col-span-5 relative flex flex-col items-center justify-center min-h-[600px] lg:pl-4">
+
+                                    <div class="relative flex items-center justify-center w-full">
+                                        <!-- Navigation Arrows - Even Closer -->
+                                        <button onclick="prevSlide()"
+                                            class="absolute left-[-20px] lg:left-[5px] z-50 p-1 text-white/50 hover:text-white hover:scale-125 transition-all text-4xl material-symbols-outlined hover:[text-shadow:0_0_15px_rgba(255,0,0,0.8)] duration-300">
+                                            chevron_left
+                                        </button>
+
+                                        <button onclick="nextSlide()"
+                                            class="absolute right-[-20px] lg:right-[5px] z-50 p-1 text-white/50 hover:text-white hover:scale-125 transition-all text-4xl material-symbols-outlined hover:[text-shadow:0_0_15px_rgba(255,0,0,0.8)] duration-300">
+                                            chevron_right
+                                        </button>
+
+                                        <!-- Layered Mockup Container -->
+                                        <div id="carousel-container"
+                                            class="relative w-full max-w-[240px] flex items-center justify-center perspective-[1000px] min-h-[520px]">
+                                            <!-- Mockups will be injected here via JS -->
+                                        </div>
+                                    </div>
+
+                                    <!-- Dot Indicators: Anchored to the very bottom of the relative column container -->
+                                    <div id="dot-indicators"
+                                        class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-3 z-50 bg-black/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/5">
+                                        <!-- Dots will be injected here -->
+                                    </div>
+                                </div>
+
+                                <!-- Right Column: Project Info -->
+                                <div class="lg:col-span-7 flex flex-col justify-center py-8">
+                                    <div id="project-info-card" class="project-card-transition">
+
+                                        <span id="project-subtitle"
+                                            class="text-sm font-mono uppercase tracking-[0.3em] text-gray-500 font-bold mb-3 block">Mobile
+                                            App • 2024</span>
+
+                                        <h3 id="project-title"
+                                            class="text-4xl lg:text-5xl font-display font-bold tracking-tighter text-white mb-6">
+                                            FILLORA</h3>
+
+                                        <p id="project-description"
+                                            class="text-gray-400 leading-relaxed mb-10 max-w-lg">
+                                            Complete Flutter application for an e-commerce platform featuring
+                                            high-fidelity mockups, complex state management, and seamless UI
+                                            transitions.
+                                        </p>
+
+                                        <!-- Tech Stack Section -->
+                                        <div class="mb-10">
+                                            <span
+                                                class="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-bold mb-4 block">Engineered
+                                                with</span>
+                                            <div id="project-tech" class="flex flex-wrap gap-4">
+                                                <!-- Tech icons will be updated by JS -->
+                                            </div>
+                                        </div>
+
+                                        <!-- Links Section -->
+                                        <div class="flex flex-wrap gap-6 mt-4">
+                                            <a id="project-github" href="#" target="_blank"
+                                                class="action-btn px-8 py-3 border border-white/20 text-white text-xs font-bold uppercase tracking-widest hover:bg-primary hover:border-primary rounded-sm transition-all flex items-center gap-2">
+                                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.61-4.041-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57">
+                                                    </path>
+                                                </svg>
+                                                GitHub Repo
+                                            </a>
+                                            <a id="project-live" href="#" target="_blank"
+                                                class="action-btn px-8 py-3 bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-white rounded-sm transition-all">
+                                                Live Demo
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -957,7 +1144,232 @@
             } else {
                 nav.classList.remove('nav-detached');
             }
+
+            // 6. Projects Section Animations
+            const projectsSection = document.getElementById('projects-section');
+            const projectsHeaderFade = document.querySelector('.projects-header-fade');
+            const projectsContentFade = document.querySelector('.projects-content-fade');
+
+            const projectsRect = projectsSection.getBoundingClientRect();
+            const triggerPoint = window.innerHeight * 0.8;
+
+            if (projectsRect.top < triggerPoint) {
+                const projProgress = Math.max(0, Math.min(1, (triggerPoint - projectsRect.top) / (window.innerHeight * 0.6)));
+
+                projectsHeaderFade.style.opacity = projProgress;
+                projectsHeaderFade.style.transform = `translateY(${(1 - projProgress) * 40}px)`;
+
+                projectsContentFade.style.opacity = projProgress;
+                projectsContentFade.style.transform = `translateY(${(1 - projProgress) * 60}px)`;
+            }
         });
+
+        // --- Project Carousel Logic ---
+        const projectData = [
+            {
+                title: "FILLORA",
+                subtitle: "Mobile App • 2024",
+                description: "Complete Flutter application for an e-commerce platform featuring high-fidelity mockups, complex state management, and seamless UI transitions. Designed with a focus on premium user experience and efficient performance.",
+                tech: ["Flutter", "Supabase", "Firebase", "Node.js"],
+                images: [
+                    "fillora/Screenshot_20260409-162159.png",
+                    "fillora/Screenshot_20260409-162209.png",
+                    "fillora/Screenshot_20260409-162214.png",
+                    "fillora/Screenshot_20260409-162221.png",
+                    "fillora/Screenshot_20260409-162228.png",
+                    "fillora/Screenshot_20260409-162233.png",
+                    "fillora/Screenshot_20260409-162251.png",
+                    "fillora/Screenshot_20260409-162459.png"
+                ],
+                github: "https://github.com/ASH274946/Portfolio",
+                live: "#"
+            },
+            {
+                title: "EXAMEASE",
+                subtitle: "Web App • 2023",
+                description: "A comprehensive examination management system designed to streamline the testing process. Features automated grading, student progress tracking, and secure exam environments.",
+                tech: ["React", "FastAPI", "PostgreSQL", "Tailwind"],
+                images: [
+                    "fillora/Screenshot_20260409-162159.png", // Using Fillora as placeholders for now
+                    "fillora/Screenshot_20260409-162209.png"
+                ],
+                github: "https://github.com/ASH274946/ExamEase",
+                live: "#"
+            }
+        ];
+
+        let activeProjectIndex = 0;
+        let currentSlide = 0;
+        let totalSlides = projectData[0].images.length;
+        let autoScrollInterval;
+        let isUserInteracting = false;
+        let lastScrollTime = Date.now();
+
+        function switchProject(index) {
+            if (activeProjectIndex === index) return;
+
+            activeProjectIndex = index;
+            currentSlide = 0;
+            totalSlides = projectData[index].images.length;
+
+            // Update UI
+            updateTabs();
+            updateProjectInfo();
+            initCarousel();
+            updateCarousel();
+        }
+
+        function updateTabs() {
+            const tabs = [document.getElementById('tab-fillora'), document.getElementById('tab-examease')];
+            tabs.forEach((tab, i) => {
+                if (i === activeProjectIndex) {
+                    tab.classList.add('active');
+                    tab.classList.remove('text-white/40');
+                    tab.classList.add('text-white');
+                } else {
+                    tab.classList.remove('active');
+                    tab.classList.add('text-white/40');
+                    tab.classList.remove('text-white');
+                }
+            });
+        }
+
+        function updateProjectInfo() {
+            const data = projectData[activeProjectIndex];
+            const card = document.getElementById('project-info-card');
+
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(10px)';
+
+            setTimeout(() => {
+                document.getElementById('project-title').textContent = data.title;
+                document.getElementById('project-subtitle').textContent = data.subtitle;
+                document.getElementById('project-description').textContent = data.description;
+                document.getElementById('project-github').href = data.github;
+                document.getElementById('project-live').href = data.live;
+                updateTechStack(data.tech);
+
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 300);
+        }
+
+        function initCarousel() {
+            const data = projectData[activeProjectIndex];
+            const container = document.getElementById('carousel-container');
+            const dots = document.getElementById('dot-indicators');
+
+            // Clear existing
+            container.innerHTML = '';
+            dots.innerHTML = '';
+
+            data.images.forEach((img, i) => {
+                // Create Mockup Element
+                const mockup = document.createElement('div');
+                mockup.className = `absolute w-full h-auto rounded-xl shadow-2xl overflow-hidden mockup-layer ${getSlideClass(i)}`;
+                mockup.innerHTML = `<img src="${img}" class="w-full h-auto block transition-transform duration-500 hover:scale-105" alt="Mockup ${i}">`;
+                container.appendChild(mockup);
+
+                // Create Dot
+                const dot = document.createElement('button');
+                dot.className = `w-2.5 h-2.5 rounded-full dot-indicator transition-all duration-300 z-50 ${i === currentSlide ? 'bg-primary' : 'bg-white/30 hover:bg-white/60'}`;
+                dot.onclick = () => goToSlide(i);
+                dots.appendChild(dot);
+            });
+        }
+
+        function getSlideClass(index) {
+            if (index === currentSlide) return 'mockup-main';
+            if (index === (currentSlide - 1 + totalSlides) % totalSlides) return 'mockup-behind-left';
+            if (index === (currentSlide + 1) % totalSlides) return 'mockup-behind-right';
+            return 'mockup-hidden';
+        }
+
+        function updateCarousel() {
+            const mockups = document.querySelectorAll('.mockup-layer');
+            const dots = document.querySelectorAll('.dot-indicator');
+            const card = document.getElementById('project-info-card');
+
+            // Fade animation trigger for content
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(10px)';
+
+            setTimeout(() => {
+                mockups.forEach((m, i) => {
+                    m.className = `absolute w-full h-auto rounded-xl shadow-2xl overflow-hidden mockup-layer ${getSlideClass(i)}`;
+                });
+
+                dots.forEach((d, i) => {
+                    d.className = `w-2.5 h-2.5 rounded-full dot-indicator transition-all duration-300 z-50 ${i === currentSlide ? 'bg-primary' : 'bg-white/30 hover:bg-white/60'}`;
+                });
+
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 300);
+        }
+
+        function nextSlide() {
+            isUserInteracting = true;
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+            restartAutoScroll();
+        }
+
+        function prevSlide() {
+            isUserInteracting = true;
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+            restartAutoScroll();
+        }
+
+        function goToSlide(index) {
+            isUserInteracting = true;
+            currentSlide = index;
+            updateCarousel();
+            restartAutoScroll();
+        }
+
+        function updateTechStack(tech) {
+            const container = document.getElementById('project-tech');
+            container.innerHTML = '';
+
+            // Map tech names to icons/colors if needed, simplified here
+            tech.forEach(t => {
+                const badge = document.createElement('div');
+                badge.className = "tech-badge w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-bold text-gray-400";
+                badge.textContent = t.substring(0, 2).toUpperCase();
+                badge.title = t;
+                container.appendChild(badge);
+            });
+        }
+
+        function startAutoScroll() {
+            if (autoScrollInterval) clearInterval(autoScrollInterval);
+            autoScrollInterval = setInterval(() => {
+                if (Date.now() - lastScrollTime > 2000) {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    updateCarousel();
+                }
+            }, 8000);
+        }
+
+        function restartAutoScroll() {
+            if (isUserInteracting) {
+                startAutoScroll();
+            }
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        window.addEventListener('scroll', () => {
+            lastScrollTime = Date.now();
+        });
+
+        // Initialize Carousel
+        initCarousel();
 
         // Initial Nav Check
         const initialNav = document.getElementById('main-nav');
