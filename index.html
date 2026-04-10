@@ -925,131 +925,128 @@
         </div>
     </div>
 
-    <!-- Projects Section -->
-    <div id="projects-section" class="relative z-[30] pt-[calc(2.5rem+20px)] pb-32 px-8 scroll-mt-24">
-        <div class="max-w-[95rem] mx-auto relative px-0">
-            <div class="relative pt-10">
-                <!-- Background Text Layer -->
-                <div class="absolute top-10 left-0 z-0 pointer-events-none select-none opacity-20 px-8 py-4">
-                    <h2
-                        class="font-display font-black text-[11vw] leading-none tracking-tighter uppercase text-[#334155] dark:text-[#94a3b8] whitespace-nowrap">
-                        MY PROJECTS.
-                    </h2>
-                </div>
+    <div id="projects-section" class="relative z-30 pt-10 pb-32 px-8 scroll-mt-24">
+        <div class="max-w-[95rem] mx-auto relative">
+            <!-- Background Text Layer -->
+            <div class="absolute top-10 left-0 z-0 pointer-events-none select-none opacity-20 px-8 py-4">
+                <h2
+                    class="font-display font-black text-[11vw] leading-none tracking-tighter uppercase text-[#334155] dark:text-[#94a3b8] whitespace-nowrap">
+                    MY PROJECTS.
+                </h2>
+            </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 pt-16 projects-header-fade">
-                    <div class="lg:col-span-12 mb-12 px-4">
-                        <div class="max-w-3xl border-l-[4px] border-primary pl-10 py-2">
-                            <p class="text-xl md:text-2xl text-primary font-medium tracking-tight opacity-90 italic">
-                                "Projects that I've built & worked on, gained some experience on how few things works &
-                                i've been the tester all the time during development, fixing things that went wrong."
-                            </p>
-                        </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 pt-16">
+                <!-- Project Quote -->
+                <div class="lg:col-span-12 projects-content-left mb-12 px-4">
+                    <div class="max-w-3xl border-l-[4px] border-primary pl-10 py-2">
+                        <p class="text-xl md:text-2xl text-primary font-medium tracking-tight opacity-90 italic">
+                            "Projects that I've built & worked on, gained some experience on how few things works &
+                            i've been the tester all the time during development, fixing things that went wrong."
+                        </p>
                     </div>
                 </div>
+            </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 projects-content-fade">
-                    <div class="lg:col-span-12 relative group w-full">
-                        <!-- Vertical Chrome-Style Tabs (Right Edge, Top-Aligned) -->
-                        <div class="absolute top-0 right-[-53px] flex flex-col w-[55px] gap-0 z-20">
-                            <!-- Fillora Tab -->
-                            <div onclick="switchProject(0)" id="tab-fillora" class="folder-tab active">
-                                <svg class="folder-tab-svg" viewBox="0 0 55 100" preserveAspectRatio="none">
-                                    <path d="M0,0 L45,0 C50,0 55,5 55,10 L55,90 C55,95 50,100 45,100 L0,100" fill="none"
-                                        stroke-width="1" />
-                                </svg>
-                                <span
-                                    class="text-[10px] font-mono tracking-widest uppercase font-bold text-white">Fillora</span>
-                            </div>
-                            <!-- ExamEase Tab -->
-                            <div onclick="switchProject(1)" id="tab-examease" class="folder-tab">
-                                <svg class="folder-tab-svg" viewBox="0 0 55 100" preserveAspectRatio="none">
-                                    <path d="M0,0 L45,0 C50,0 55,5 55,10 L55,90 C55,95 50,100 45,100 L0,100" fill="none"
-                                        stroke-width="1" />
-                                </svg>
-                                <span
-                                    class="text-[10px] font-mono tracking-widest uppercase font-bold text-white/40">ExamEase</span>
-                            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 pt-0">
+                <div class="lg:col-span-12 relative group w-full projects-content-right">
+                    <!-- Vertical Chrome-Style Tabs (Right Edge, Top-Aligned) -->
+                    <div class="absolute top-0 right-[-53px] flex flex-col w-[55px] gap-0 z-20">
+                        <!-- Fillora Tab -->
+                        <div onclick="switchProject(0)" id="tab-fillora" class="folder-tab active">
+                            <svg class="folder-tab-svg" viewBox="0 0 55 100" preserveAspectRatio="none">
+                                <path d="M0,0 L45,0 C50,0 55,5 55,10 L55,90 C55,95 50,100 45,100 L0,100" fill="none"
+                                    stroke-width="1" />
+                            </svg>
+                            <span
+                                class="text-[10px] font-mono tracking-widest uppercase font-bold text-white">Fillora</span>
                         </div>
+                        <!-- ExamEase Tab -->
+                        <div onclick="switchProject(1)" id="tab-examease" class="folder-tab">
+                            <svg class="folder-tab-svg" viewBox="0 0 55 100" preserveAspectRatio="none">
+                                <path d="M0,0 L45,0 C50,0 55,5 55,10 L55,90 C55,95 50,100 45,100 L0,100" fill="none"
+                                    stroke-width="1" />
+                            </svg>
+                            <span
+                                class="text-[10px] font-mono tracking-widest uppercase font-bold text-white/40">ExamEase</span>
+                        </div>
+                    </div>
 
-                        <div
-                            class="bg-white/5 backdrop-blur-sm p-12 rounded-2xl border border-white/10 shadow-2xl relative z-20">
-                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-                                <!-- Left Column: Carousel -->
-                                <div
-                                    class="lg:col-span-5 relative flex flex-col items-center justify-center min-h-[600px] lg:pl-4">
+                    <div
+                        class="bg-white/5 backdrop-blur-sm p-12 rounded-2xl border border-white/10 shadow-2xl relative z-10">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                            <!-- Left Column: Carousel -->
+                            <div
+                                class="lg:col-span-5 relative flex flex-col items-center justify-center min-h-[600px] lg:pl-4">
 
-                                    <div class="relative flex items-center justify-center w-full">
-                                        <!-- Navigation Arrows - Even Closer -->
-                                        <button onclick="prevSlide()"
-                                            class="absolute left-[-20px] lg:left-[5px] z-50 p-1 text-white/50 hover:text-white hover:scale-125 transition-all text-4xl material-symbols-outlined hover:[text-shadow:0_0_15px_rgba(255,0,0,0.8)] duration-300">
-                                            chevron_left
-                                        </button>
+                                <div class="relative flex items-center justify-center w-full">
+                                    <!-- Navigation Arrows - Even Closer -->
+                                    <button onclick="prevSlide()"
+                                        class="absolute left-[-20px] lg:left-[5px] z-50 p-1 text-white/50 hover:text-white hover:scale-125 transition-all text-4xl material-symbols-outlined hover:[text-shadow:0_0_15px_rgba(255,0,0,0.8)] duration-300">
+                                        chevron_left
+                                    </button>
 
-                                        <button onclick="nextSlide()"
-                                            class="absolute right-[-20px] lg:right-[5px] z-50 p-1 text-white/50 hover:text-white hover:scale-125 transition-all text-4xl material-symbols-outlined hover:[text-shadow:0_0_15px_rgba(255,0,0,0.8)] duration-300">
-                                            chevron_right
-                                        </button>
+                                    <button onclick="nextSlide()"
+                                        class="absolute right-[-20px] lg:right-[5px] z-50 p-1 text-white/50 hover:text-white hover:scale-125 transition-all text-4xl material-symbols-outlined hover:[text-shadow:0_0_15px_rgba(255,0,0,0.8)] duration-300">
+                                        chevron_right
+                                    </button>
 
-                                        <!-- Layered Mockup Container -->
-                                        <div id="carousel-container"
-                                            class="relative w-full max-w-[240px] flex items-center justify-center perspective-[1000px] min-h-[520px]">
-                                            <!-- Mockups will be injected here via JS -->
-                                        </div>
-                                    </div>
-
-                                    <!-- Dot Indicators: Anchored to the very bottom of the relative column container -->
-                                    <div id="dot-indicators"
-                                        class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-3 z-50 bg-black/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/5">
-                                        <!-- Dots will be injected here -->
+                                    <!-- Layered Mockup Container -->
+                                    <div id="carousel-container"
+                                        class="relative w-full max-w-[240px] flex items-center justify-center perspective-[1000px] min-h-[520px]">
+                                        <!-- Mockups will be injected here via JS -->
                                     </div>
                                 </div>
 
-                                <!-- Right Column: Project Info -->
-                                <div class="lg:col-span-7 flex flex-col justify-center py-8">
-                                    <div id="project-info-card" class="project-card-transition">
+                                <!-- Dot Indicators: Anchored to the very bottom of the relative column container -->
+                                <div id="dot-indicators"
+                                    class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-3 z-50 bg-black/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/5">
+                                    <!-- Dots will be injected here -->
+                                </div>
+                            </div>
 
-                                        <span id="project-subtitle"
-                                            class="text-sm font-mono uppercase tracking-[0.3em] text-gray-500 font-bold mb-3 block">Mobile
-                                            App • 2024</span>
+                            <!-- Right Column: Project Info -->
+                            <div class="lg:col-span-7 flex flex-col justify-center py-8">
+                                <div id="project-info-card" class="project-card-transition">
 
-                                        <h3 id="project-title"
-                                            class="text-4xl lg:text-5xl font-display font-bold tracking-tighter text-white mb-6">
-                                            FILLORA</h3>
+                                    <span id="project-subtitle"
+                                        class="text-sm font-mono uppercase tracking-[0.3em] text-gray-500 font-bold mb-3 block">Mobile
+                                        App • 2024</span>
 
-                                        <p id="project-description"
-                                            class="text-gray-400 leading-relaxed mb-10 max-w-lg">
-                                            Complete Flutter application for an e-commerce platform featuring
-                                            high-fidelity mockups, complex state management, and seamless UI
-                                            transitions.
-                                        </p>
+                                    <h3 id="project-title"
+                                        class="text-4xl lg:text-5xl font-display font-bold tracking-tighter text-white mb-6">
+                                        FILLORA</h3>
 
-                                        <!-- Tech Stack Section -->
-                                        <div class="mb-10">
-                                            <span
-                                                class="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-bold mb-4 block">Engineered
-                                                with</span>
-                                            <div id="project-tech" class="flex flex-wrap gap-4">
-                                                <!-- Tech icons will be updated by JS -->
-                                            </div>
+                                    <p id="project-description" class="text-gray-400 leading-relaxed mb-10 max-w-lg">
+                                        Complete Flutter application for an e-commerce platform featuring
+                                        high-fidelity mockups, complex state management, and seamless UI
+                                        transitions.
+                                    </p>
+
+                                    <!-- Tech Stack Section -->
+                                    <div class="mb-10">
+                                        <span
+                                            class="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-bold mb-4 block">Engineered
+                                            with</span>
+                                        <div id="project-tech" class="flex flex-wrap gap-4">
+                                            <!-- Tech icons will be updated by JS -->
                                         </div>
+                                    </div>
 
-                                        <!-- Links Section -->
-                                        <div class="flex flex-wrap gap-6 mt-4">
-                                            <a id="project-github" href="#" target="_blank"
-                                                class="action-btn px-8 py-3 border border-white/20 text-white text-xs font-bold uppercase tracking-widest hover:bg-primary hover:border-primary rounded-sm transition-all flex items-center gap-2">
-                                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.61-4.041-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57">
-                                                    </path>
-                                                </svg>
-                                                GitHub Repo
-                                            </a>
-                                            <a id="project-live" href="#" target="_blank"
-                                                class="action-btn px-8 py-3 bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-white rounded-sm transition-all">
-                                                Live Demo
-                                            </a>
-                                        </div>
+                                    <!-- Links Section -->
+                                    <div class="flex flex-wrap gap-6 mt-4">
+                                        <a id="project-github" href="#" target="_blank"
+                                            class="action-btn px-8 py-3 border border-white/20 text-white text-xs font-bold uppercase tracking-widest hover:bg-primary hover:border-primary rounded-sm transition-all flex items-center gap-2">
+                                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.61-4.041-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57">
+                                                </path>
+                                            </svg>
+                                            GitHub Repo
+                                        </a>
+                                        <a id="project-live" href="#" target="_blank"
+                                            class="action-btn px-8 py-3 bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-white rounded-sm transition-all">
+                                            Live Demo
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -1147,20 +1144,25 @@
 
             // 6. Projects Section Animations
             const projectsSection = document.getElementById('projects-section');
-            const projectsHeaderFade = document.querySelector('.projects-header-fade');
-            const projectsContentFade = document.querySelector('.projects-content-fade');
+            const projectsLefts = document.querySelectorAll('.projects-content-left');
+            const projectsRights = document.querySelectorAll('.projects-content-right');
 
             const projectsRect = projectsSection.getBoundingClientRect();
             const triggerPoint = window.innerHeight * 0.8;
 
             if (projectsRect.top < triggerPoint) {
                 const projProgress = Math.max(0, Math.min(1, (triggerPoint - projectsRect.top) / (window.innerHeight * 0.6)));
+                const projOpacity = projProgress;
+                const projOffset = (1 - projProgress) * 60;
 
-                projectsHeaderFade.style.opacity = projProgress;
-                projectsHeaderFade.style.transform = `translateY(${(1 - projProgress) * 40}px)`;
-
-                projectsContentFade.style.opacity = projProgress;
-                projectsContentFade.style.transform = `translateY(${(1 - projProgress) * 60}px)`;
+                projectsLefts.forEach(el => {
+                    el.style.opacity = projOpacity;
+                    el.style.transform = `translateX(${-projOffset}px)`;
+                });
+                projectsRights.forEach(el => {
+                    el.style.opacity = projOpacity;
+                    el.style.transform = `translateX(${projOffset}px)`;
+                });
             }
         });
 
