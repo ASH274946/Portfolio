@@ -342,50 +342,46 @@
             display: none;
         }
 
-        .folder-tab-svg {
-            position: absolute;
-            left: -2px;
-            top: 0;
-            width: 55px;
-            height: 100%;
-            z-index: -1;
-            transition: all 0.3s ease;
-        }
-
-        .folder-tab {
-            position: relative;
-            height: 100px;
-            width: 55px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .folder-tab span {
-            writing-mode: vertical-lr;
-            transform: rotate(180deg);
-            font-family: inherit;
+        /* Projects Dropdown Menu */
+        .projects-dropdown-menu {
+            opacity: 0;
+            transform: translateY(-10px) scale(0.95);
             pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .folder-tab.active .folder-tab-svg path {
-            fill: rgba(255, 255, 255, 0.08); /* Match container bg */
-            stroke: rgba(255, 255, 255, 0.1);
+        .projects-dropdown-menu.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
         }
 
-        .folder-tab:not(.active) .folder-tab-svg path {
-            fill: rgba(0, 0, 0, 0.4);
-            stroke: rgba(255, 255, 255, 0.1);
+        .dropdown-item {
+            transition: all 0.3s ease;
         }
 
-        .folder-tab.active {
-            z-index: 30;
+        .dropdown-item:hover {
+            background: rgba(255, 17, 17, 0.1);
+            color: #FF1111;
         }
 
-        .folder-tab:hover:not(.active) .folder-tab-svg path {
-            fill: rgba(255, 255, 255, 0.04);
+        .dropdown-item.active {
+            color: #FF1111;
+            background: rgba(255, 17, 17, 0.05);
+        }
+
+        .three-dashes {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .three-dashes span {
+            display: block;
+            width: 14px;
+            height: 1.5px;
+            background: currentColor;
+            border-radius: 1px;
         }
     </style>
     </style>
@@ -668,7 +664,7 @@
                     </div>
 
                     <div
-                        class="relative z-10 about-content-right bg-white/5 backdrop-blur-sm p-12 rounded-2xl border border-white/10 shadow-2xl">
+                        class="relative z-10 about-content-right bg-white/5 backdrop-blur-sm p-12 rounded-[2.5rem] border border-white/10 shadow-2xl">
                         <div class="mb-12">
                             <span class="text-xs font-mono uppercase tracking-[0.5em] text-primary font-bold">Technical
                                 Expertise</span>
@@ -924,7 +920,7 @@
     <div id="projects-section-wrapper" class="relative z-30 pt-10 pb-32 overflow-hidden scroll-mt-24">
         <div class="max-w-[95rem] mx-auto relative">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
-                
+
                 <div id="projects-section" class="lg:col-span-12 relative scroll-mt-24 pt-10">
                     <!-- Background Text Layer -->
                     <div class="absolute top-10 left-0 z-0 pointer-events-none select-none opacity-20 px-8 py-4">
@@ -938,16 +934,19 @@
                         <!-- Project Quote -->
                         <div class="lg:col-span-12 projects-content-left mb-12 px-4">
                             <div class="max-w-3xl border-l-[4px] border-primary pl-10 py-2">
-                                <p class="text-xl md:text-2xl text-primary font-medium tracking-tight opacity-90 italic">
-                                    "Projects that I've built & worked on, gained some experience on how few things works &
-                                    i've been the tester all the time during development, fixing things that went wrong."
+                                <p
+                                    class="text-xl md:text-2xl text-primary font-medium tracking-tight opacity-90 italic">
+                                    "Projects that I've built & worked on, gained some experience on how few things
+                                    works &
+                                    i've been the tester all the time during development, fixing things that went
+                                    wrong."
                                 </p>
                             </div>
                         </div>
                     </div>
 
                     <div
-                        class="relative z-10 projects-content-right bg-white/5 backdrop-blur-sm p-12 rounded-2xl border border-white/10 shadow-2xl">
+                        class="relative z-10 projects-content-right bg-white/5 backdrop-blur-sm p-12 rounded-[2.5rem] border border-white/10 shadow-2xl">
                         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
                             <!-- Left Column: Carousel -->
                             <div
@@ -973,31 +972,37 @@
                                 </div>
 
                                 <!-- Dot Indicators -->
-                                <div id="dot-indicators"
-                                    class="flex gap-3 justify-center mt-8 relative z-50 py-4"></div>
+                                <div id="dot-indicators" class="flex gap-3 justify-center mt-8 relative z-50 py-4">
+                                </div>
                             </div>
 
                             <!-- Right Column: Project Info -->
                             <div class="lg:col-span-7 flex flex-col justify-center relative">
-                                <!-- Tabs moved inside the column for better positioning -->
-                                <div class="absolute top-0 right-[-53px] flex flex-col w-[55px] gap-0 z-20">
-                                    <!-- Fillora Tab -->
-                                    <div onclick="switchProject(0)" id="tab-fillora" class="folder-tab active">
-                                        <svg class="folder-tab-svg" viewBox="0 0 55 100" preserveAspectRatio="none">
-                                            <path d="M0,0 L45,0 C50,0 55,5 55,10 L55,90 C55,95 50,100 45,100 L0,100" fill="none"
-                                                stroke-width="1" />
-                                        </svg>
-                                        <span
-                                            class="text-[10px] font-mono tracking-widest uppercase font-bold text-white">Fillora</span>
-                                    </div>
-                                    <!-- ExamEase Tab -->
-                                    <div onclick="switchProject(1)" id="tab-examease" class="folder-tab">
-                                        <svg class="folder-tab-svg" viewBox="0 0 55 100" preserveAspectRatio="none">
-                                            <path d="M0,0 L45,0 C50,0 55,5 55,10 L55,90 C55,95 50,100 45,100 L0,100" fill="none"
-                                                stroke-width="1" />
-                                        </svg>
-                                        <span
-                                            class="text-[10px] font-mono tracking-widest uppercase font-bold text-white/40">ExamEase</span>
+                                <!-- Projects Dropdown Selector -->
+                                <div class="absolute top-8 right-8 z-50">
+                                    <button onclick="toggleProjectsDropdown(event)"
+                                        class="flex items-center gap-4 px-5 py-2.5 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-colors backdrop-blur-sm border border-transparent hover:border-black/5 dark:hover:border-white/5 transition-all group">
+                                        <span class="text-xs font-bold uppercase tracking-[0.15em] text-black dark:text-white group-hover:text-primary transition-colors">Explore more</span>
+                                        <div class="three-dashes text-black dark:text-white group-hover:text-primary transition-colors">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </button>
+
+                                    <!-- Dropdown Menu -->
+                                    <div id="projects-dropdown"
+                                        class="projects-dropdown-menu absolute top-full right-0 mt-3 w-64 bg-[#1e1e1e]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl py-3 z-[60]">
+                                        <div onclick="selectProject(0)" id="dropdown-item-0" 
+                                            class="dropdown-item px-6 py-4 cursor-pointer flex justify-between items-center group active">
+                                            <span class="text-sm font-bold uppercase tracking-widest">Fillora</span>
+                                            <span class="material-symbols-outlined text-transparent group-[.active]:text-primary text-base">check_circle</span>
+                                        </div>
+                                        <div onclick="selectProject(1)" id="dropdown-item-1" 
+                                            class="dropdown-item px-6 py-4 cursor-pointer flex justify-between items-center group">
+                                            <span class="text-sm font-bold uppercase tracking-widest">ExamEase</span>
+                                            <span class="material-symbols-outlined text-transparent group-[.active]:text-primary text-base">check_circle</span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1030,7 +1035,8 @@
                                     </div>
 
                                     <div class="flex flex-wrap gap-4">
-                                        <a id="project-github" href="https://github.com/ASH274946/Fillora.in.git" target="_blank"
+                                        <a id="project-github" href="https://github.com/ASH274946/Fillora.in.git"
+                                            target="_blank"
                                             class="action-btn px-8 py-3 bg-white/5 border border-white/10 hover:border-primary text-xs font-bold uppercase tracking-widest rounded-sm transition-all flex items-center gap-2">
                                             GitHub Repo
                                         </a>
@@ -1136,7 +1142,7 @@
             // 5. Projects Animation - Removed per request for consistency
             const projectsLefts = document.querySelectorAll('.projects-content-left');
             const projectsRights = document.querySelectorAll('.projects-content-right');
-            
+
             projectsLefts.forEach(el => {
                 el.style.opacity = '1';
                 el.style.transform = 'none';
@@ -1188,6 +1194,25 @@
         let isUserInteracting = false;
         let lastScrollTime = Date.now();
 
+        function toggleProjectsDropdown(e) {
+            if (e) e.stopPropagation();
+            const dropdown = document.getElementById('projects-dropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function selectProject(index) {
+            switchProject(index);
+            document.getElementById('projects-dropdown').classList.remove('active');
+        }
+
+        // Close dropdown when clicking elsewhere
+        window.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('projects-dropdown');
+            if (dropdown && dropdown.classList.contains('active')) {
+                dropdown.classList.remove('active');
+            }
+        });
+
         function switchProject(index) {
             if (activeProjectIndex === index) return;
 
@@ -1196,23 +1221,19 @@
             totalSlides = projectData[index].images.length;
 
             // Update UI
-            updateTabs();
+            updateDropdownUI();
             updateProjectInfo();
             initCarousel();
             updateCarousel();
         }
 
-        function updateTabs() {
-            const tabs = [document.getElementById('tab-fillora'), document.getElementById('tab-examease')];
-            tabs.forEach((tab, i) => {
+        function updateDropdownUI() {
+            const items = [document.getElementById('dropdown-item-0'), document.getElementById('dropdown-item-1')];
+            items.forEach((item, i) => {
                 if (i === activeProjectIndex) {
-                    tab.classList.add('active');
-                    tab.classList.remove('text-white/40');
-                    tab.classList.add('text-white');
+                    item.classList.add('active');
                 } else {
-                    tab.classList.remove('active');
-                    tab.classList.add('text-white/40');
-                    tab.classList.remove('text-white');
+                    item.classList.remove('active');
                 }
             });
         }
