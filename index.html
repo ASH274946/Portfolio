@@ -1190,7 +1190,16 @@
             {
                 title: "FILLORA",
                 subtitle: "Mobile App • 2024",
-                description: "Complete Flutter application for an e-commerce platform featuring high-fidelity mockups, complex state management, and seamless UI transitions. Designed with a focus on premium user experience and efficient performance.",
+                description: [
+                    "The Landing page where you get the complete overview of the application, The analytics where you track your submitted forms and the forms in progress & total time saved, The quiek actions section where you can navigate to the available templates.",
+                    "The Templates section page where the user can navigate throughh the available templates in the app, and also filter out specific forms according to their needs.",
+                    "The history section where the user can keep track of all the forms and manage them.",
+                    "The Settings Section where user can manage their profile, applicaiton's appearence and few other things like version details about app",
+                    "New form section where the user can access this section by clicking the plus in the nav bar, and can start filling out forms in 3 modes by uploading an image or PDF, by uploading / pasting a URL or by browsing templates in the library available in the app.",
+                    "The user pastes URL in the field provided.",
+                    "The provided URL will be analyzed and all the fields will be fetched from the URL and displayed to the user",
+                    "The debug console where user can keep track of each and every action performed till the very last moment, if something goes wrong or any error occurs user can track and report that issue."
+                ],
                 tech: ["Flutter", "Supabase", "Firebase", "Node.js"],
                 images: [
                     "Fillora/Screenshot_20260409-162159.png",
@@ -1281,7 +1290,7 @@
             setTimeout(() => {
                 document.getElementById('project-title').textContent = data.title;
                 document.getElementById('project-subtitle').textContent = data.subtitle;
-                description.textContent = data.description;
+                description.textContent = Array.isArray(data.description) ? data.description[currentSlide] : data.description;
                 document.getElementById('project-github').href = data.github;
                 document.getElementById('project-live').href = data.live;
                 updateTechStack(data.tech);
@@ -1330,7 +1339,7 @@
 
             // Apply the fade animation to description only
             description.style.opacity = '0';
-            
+
             setTimeout(() => {
                 mockups.forEach((m, i) => {
                     m.className = `absolute w-full h-auto rounded-xl shadow-2xl overflow-hidden mockup-layer ${getSlideClass(i)}`;
@@ -1340,6 +1349,8 @@
                     d.className = `w-2.5 h-2.5 rounded-full dot-indicator transition-all duration-300 z-50 ${i === currentSlide ? 'bg-primary' : 'bg-white/30 hover:bg-white/60'}`;
                 });
 
+                const data = projectData[activeProjectIndex];
+                description.textContent = Array.isArray(data.description) ? data.description[currentSlide] : data.description;
                 description.style.opacity = '1';
             }, 300);
         }
