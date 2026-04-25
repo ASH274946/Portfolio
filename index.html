@@ -982,7 +982,7 @@
                     <div
                         class="relative z-10 projects-content-right bg-white/5 backdrop-blur-sm p-12 rounded-[2.5rem] border border-white/10 shadow-2xl">
                         <!-- Projects Dropdown Selector -->
-                        <div class="absolute top-[1rem] right-[1rem] z-50">
+                        <div class="absolute top-[1rem] right-[1rem] z-[100] isolate">
                             <button onclick="toggleProjectsDropdown(event)"
                                 class="action-btn flex items-center gap-3 px-6 py-2.5 rounded-[2.5rem] bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-colors backdrop-blur-sm border border-transparent hover:border-primary transition-all group">
                                 <span
@@ -992,7 +992,7 @@
 
                             <!-- Dropdown Menu -->
                             <div id="projects-dropdown"
-                                class="projects-dropdown-menu absolute top-full right-0 mt-[1rem] w-64 rounded-2xl py-2 z-[60]">
+                                class="projects-dropdown-menu absolute top-full right-0 mt-[1rem] w-64 rounded-2xl py-2 z-[100]">
                                 <div class="dropdown-header">Select Project</div>
                                 <div onclick="selectProject(0)" id="dropdown-item-0"
                                     class="dropdown-item flex justify-between items-center group active">
@@ -1006,7 +1006,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 relative z-0">
                             <!-- Left Column: Carousel -->
                             <div
                                 class="lg:col-span-5 relative flex flex-col items-center justify-center min-h-[600px] lg:pl-4">
@@ -1036,13 +1036,13 @@
                             </div>
 
                             <!-- Right Column: Project Info -->
-                            <div class="lg:col-span-7 flex flex-col justify-center relative">
+                            <div class="lg:col-span-7 flex flex-col justify-center relative z-0">
 
-                                <div id="project-info-card" class="project-card-transition">
-                                    <div class="mb-4">
+                                <div id="project-info-card" class="project-card-transition relative z-0">
+                                    <div class="mb-4 relative z-0 pr-40 lg:pr-64">
                                         <span id="project-subtitle"
                                             class="text-xs font-mono uppercase tracking-[0.25em] text-primary font-bold ml-[3px]">Mobile
-                                            App • 2025</span>
+                                            App • 2024 <br /> Under Development (will be available soon)</span>
                                         <h3 id="project-title"
                                             class="text-5xl lg:text-7xl font-display font-black mt-2 tracking-tighter">
                                             FILLORA</h3>
@@ -1189,7 +1189,7 @@
         const projectData = [
             {
                 title: "FILLORA",
-                subtitle: "Mobile App • 2024 • Under Development (will be available soon)",
+                subtitle: "Mobile App • 2024 <br /> Under Development (will be available soon)",
                 description: [
                     "The Landing page where you get the complete overview of the application, The analytics where you track your submitted forms and the forms in progress & total time saved, The quiek actions section where you can navigate to the available templates.",
                     "The Templates section page where the user can navigate throughh the available templates in the app, and also filter out specific forms according to their needs.",
@@ -1216,7 +1216,7 @@
             },
             {
                 title: "EXAMEASE",
-                subtitle: "Web App • 2023 • Only UI is functional (Development will be started as soon as the first one completes)",
+                subtitle: "Web App • 2023 <br /> Only UI is functional (Development will be started soon)",
                 description: "A comprehensive examination management system designed to streamline the testing process. Features automated grading, student progress tracking, and secure exam environments.",
                 tech: ["React", "FastAPI", "PostgreSQL", "Tailwind"],
                 images: [
@@ -1289,7 +1289,7 @@
 
             setTimeout(() => {
                 document.getElementById('project-title').textContent = data.title;
-                document.getElementById('project-subtitle').textContent = data.subtitle;
+                document.getElementById('project-subtitle').innerHTML = data.subtitle;
                 description.textContent = Array.isArray(data.description) ? data.description[currentSlide] : data.description;
                 document.getElementById('project-github').href = data.github;
                 document.getElementById('project-live').href = data.live;
