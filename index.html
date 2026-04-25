@@ -142,6 +142,16 @@
             transform: translate(-50%, -50%) scale(0.8);
         }
 
+        .carousel-web {
+            max-width: 90% !important;
+            min-height: 400px !important;
+        }
+
+        .carousel-mobile {
+            max-width: 240px !important;
+            min-height: 520px !important;
+        }
+
         .sliding-text-row {
             will-change: transform;
             white-space: nowrap;
@@ -1025,7 +1035,7 @@
 
                                     <!-- Layered Mockup Container -->
                                     <div id="carousel-container"
-                                        class="relative w-full max-w-[240px] flex items-center justify-center perspective-[1000px] min-h-[520px]">
+                                        class="relative w-full flex items-center justify-center perspective-[2000px] carousel-mobile transition-all duration-500">
                                         <!-- Mockups will be injected here via JS -->
                                     </div>
                                 </div>
@@ -1212,7 +1222,8 @@
                     "Fillora/Screenshot_20260409-162459.png"
                 ],
                 github: "https://github.com/ASH274946/Fillora.in.git",
-                live: "#"
+                live: "#",
+                isWeb: false
             },
             {
                 title: "EXAMEASE",
@@ -1231,7 +1242,8 @@
                     "ExamEase/Screenshot 2026-04-25 133456.png"
                 ],
                 github: "https://github.com/ASH274946/ExamEase",
-                live: "#"
+                live: "#",
+                isWeb: true
             }
         ];
 
@@ -1267,6 +1279,16 @@
             activeProjectIndex = index;
             currentSlide = 0;
             totalSlides = projectData[index].images.length;
+
+            // Update Container Size
+            const container = document.getElementById('carousel-container');
+            if (projectData[index].isWeb) {
+                container.classList.remove('carousel-mobile');
+                container.classList.add('carousel-web');
+            } else {
+                container.classList.remove('carousel-web');
+                container.classList.add('carousel-mobile');
+            }
 
             // Update UI
             updateDropdownUI();
@@ -1348,8 +1370,23 @@
             description.style.opacity = '0';
 
             setTimeout(() => {
+                const isWeb = projectData[activeProjectIndex].isWeb;
                 mockups.forEach((m, i) => {
-                    m.className = `absolute w-full h-auto rounded-xl shadow-2xl overflow-hidden mockup-layer ${getSlideClass(i)}`;
+                    const slideClass = getSlideClass(i);
+                    m.className = `absolute w-full h-auto rounded-xl shadow-2xl overflow-hidden mockup-layer ${slideClass}`;
+                    
+                    // Apply extra adjustments for web layout stack
+                    if (isWeb) {
+                        if (slideClass === 'mockup-behind-left') {
+                            m.style.transform = 'translateX(-80px) scale(0.9) rotate(-3deg)';
+                        } else if (slideClass === 'mockup-behind-right') {
+                            m.style.transform = 'translateX(80px) scale(0.9) rotate(3deg)';
+                        } else {
+                            m.style.transform = '';
+                        }
+                    } else {
+                        m.style.transform = '';
+                    }
                 });
 
                 dots.forEach((d, i) => {
