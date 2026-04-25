@@ -143,13 +143,13 @@
         }
 
         .carousel-web {
-            max-width: 90% !important;
-            min-height: 400px !important;
+            max-width: 145% !important;
+            min-height: 350px !important;
         }
 
         .carousel-mobile {
-            max-width: 240px !important;
-            min-height: 520px !important;
+            max-width: 270px !important;
+            min-height: 560px !important;
         }
 
         .sliding-text-row {
@@ -336,20 +336,23 @@
 
         .mockup-behind-left {
             z-index: 20;
-            transform: translateX(-30px) scale(0.9) rotate(-3deg);
+            transform: translateX(-12%) scale(0.9) rotate(-3deg);
             opacity: 0.4;
             filter: brightness(0.5) blur(1px);
         }
 
         .mockup-behind-right {
             z-index: 10;
-            transform: translateX(30px) scale(0.9) rotate(3deg);
+            transform: translateX(12%) scale(0.9) rotate(3deg);
             opacity: 0.4;
             filter: brightness(0.3) blur(2px);
         }
 
         .mockup-hidden {
-            display: none;
+            opacity: 0;
+            transform: scale(0.8) translateY(20px);
+            pointer-events: none;
+            z-index: 0;
         }
 
         /* Projects Dropdown Menu */
@@ -1019,34 +1022,35 @@
                         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 relative z-0">
                             <!-- Left Column: Carousel -->
                             <div
-                                class="lg:col-span-5 relative flex flex-col items-center justify-center min-h-[600px] lg:pl-4">
+                                class="lg:col-span-5 relative flex flex-col items-center justify-center min-h-[600px] lg:pl-16">
 
-                                <div class="relative flex items-center justify-center w-full">
-                                    <!-- Navigation Arrows - Even Closer -->
+                                <div id="carousel-wrapper"
+                                    class="relative carousel-mobile transition-all duration-500 w-full flex items-center justify-center">
+                                    <!-- Navigation Arrows - Moved inside wrapper -->
                                     <button onclick="prevSlide()"
-                                        class="absolute left-[-20px] lg:left-[5px] z-50 p-1 text-white/50 hover:text-white hover:scale-125 transition-all text-4xl material-symbols-outlined hover:[text-shadow:0_0_15px_rgba(255,0,0,0.8)] duration-300">
+                                        class="absolute left-[-65px] z-50 p-1 text-white/50 hover:text-white hover:scale-125 transition-all text-4xl material-symbols-outlined hover:[text-shadow:0_0_15px_rgba(255,0,0,0.8)] duration-300">
                                         chevron_left
                                     </button>
 
                                     <button onclick="nextSlide()"
-                                        class="absolute right-[-20px] lg:right-[5px] z-50 p-1 text-white/50 hover:text-white hover:scale-125 transition-all text-4xl material-symbols-outlined hover:[text-shadow:0_0_15px_rgba(255,0,0,0.8)] duration-300">
+                                        class="absolute right-[-65px] z-50 p-1 text-white/50 hover:text-white hover:scale-125 transition-all text-4xl material-symbols-outlined hover:[text-shadow:0_0_15px_rgba(255,0,0,0.8)] duration-300">
                                         chevron_right
                                     </button>
 
                                     <!-- Layered Mockup Container -->
                                     <div id="carousel-container"
-                                        class="relative w-full flex items-center justify-center perspective-[2000px] carousel-mobile transition-all duration-500">
+                                        class="relative w-full flex items-center justify-center perspective-[2000px]">
                                         <!-- Mockups will be injected here via JS -->
                                     </div>
                                 </div>
 
                                 <!-- Dot Indicators -->
-                                <div id="dot-indicators" class="flex gap-3 justify-center mt-8 relative z-50 py-4">
+                                <div id="dot-indicators" class="flex gap-3 justify-center mt-4 relative z-50 py-4">
                                 </div>
                             </div>
 
                             <!-- Right Column: Project Info -->
-                            <div class="lg:col-span-7 flex flex-col justify-center relative z-0">
+                            <div class="lg:col-span-7 flex flex-col justify-center relative z-0 pl-8 lg:pl-32">
 
                                 <div id="project-info-card" class="project-card-transition relative z-0">
                                     <div class="mb-4 relative z-0 pr-40 lg:pr-64">
@@ -1280,21 +1284,32 @@
             currentSlide = 0;
             totalSlides = projectData[index].images.length;
 
-            // Update Container Size
-            const container = document.getElementById('carousel-container');
+            // Update Wrapper Size and Arrows
+            const wrapper = document.getElementById('carousel-wrapper');
+            const prevBtn = wrapper.querySelector('button[onclick="prevSlide()"]');
+            const nextBtn = wrapper.querySelector('button[onclick="nextSlide()"]');
+
             if (projectData[index].isWeb) {
-                container.classList.remove('carousel-mobile');
-                container.classList.add('carousel-web');
+                wrapper.classList.remove('carousel-mobile');
+                wrapper.classList.add('carousel-web');
+                prevBtn.style.left = "-95px";
+                nextBtn.style.right = "-95px";
             } else {
-                container.classList.remove('carousel-web');
-                container.classList.add('carousel-mobile');
+                wrapper.classList.remove('carousel-web');
+                wrapper.classList.add('carousel-mobile');
+                prevBtn.style.left = "-65px";
+                nextBtn.style.right = "-65px";
             }
 
             // Update UI
             updateDropdownUI();
             updateProjectInfo();
             initCarousel();
-            updateCarousel();
+            
+            // Allow CSS to register the hidden initial state before animating
+            setTimeout(() => {
+                updateCarousel();
+            }, 50);
         }
 
         function updateDropdownUI() {
@@ -1340,9 +1355,9 @@
             dots.innerHTML = '';
 
             data.images.forEach((img, i) => {
-                // Create Mockup Element
+                // Create Mockup Element initially hidden to setup transition
                 const mockup = document.createElement('div');
-                mockup.className = `absolute w-full h-auto rounded-xl shadow-2xl overflow-hidden mockup-layer ${getSlideClass(i)}`;
+                mockup.className = `absolute w-full h-auto rounded-xl shadow-2xl overflow-hidden mockup-layer mockup-hidden`;
                 mockup.innerHTML = `<img src="${img}" class="w-full h-auto block transition-transform duration-500 hover:scale-105" alt="Mockup ${i}">`;
                 container.appendChild(mockup);
 
@@ -1366,33 +1381,19 @@
             const dots = document.querySelectorAll('.dot-indicator');
             const description = document.getElementById('project-description');
 
-            // Apply the fade animation to description only
+            // 1. Immediately trigger layout changes for smooth responsiveness
+            mockups.forEach((m, i) => {
+                const slideClass = getSlideClass(i);
+                m.className = `absolute w-full h-auto rounded-xl shadow-2xl overflow-hidden mockup-layer ${slideClass}`;
+            });
+
+            dots.forEach((d, i) => {
+                d.className = `w-2.5 h-2.5 rounded-full dot-indicator transition-all duration-300 z-50 ${i === currentSlide ? 'bg-primary' : 'bg-white/30 hover:bg-white/60'}`;
+            });
+
+            // 2. Wrap only the text fading mechanic in the delay block
             description.style.opacity = '0';
-
             setTimeout(() => {
-                const isWeb = projectData[activeProjectIndex].isWeb;
-                mockups.forEach((m, i) => {
-                    const slideClass = getSlideClass(i);
-                    m.className = `absolute w-full h-auto rounded-xl shadow-2xl overflow-hidden mockup-layer ${slideClass}`;
-                    
-                    // Apply extra adjustments for web layout stack
-                    if (isWeb) {
-                        if (slideClass === 'mockup-behind-left') {
-                            m.style.transform = 'translateX(-80px) scale(0.9) rotate(-3deg)';
-                        } else if (slideClass === 'mockup-behind-right') {
-                            m.style.transform = 'translateX(80px) scale(0.9) rotate(3deg)';
-                        } else {
-                            m.style.transform = '';
-                        }
-                    } else {
-                        m.style.transform = '';
-                    }
-                });
-
-                dots.forEach((d, i) => {
-                    d.className = `w-2.5 h-2.5 rounded-full dot-indicator transition-all duration-300 z-50 ${i === currentSlide ? 'bg-primary' : 'bg-white/30 hover:bg-white/60'}`;
-                });
-
                 const data = projectData[activeProjectIndex];
                 description.textContent = Array.isArray(data.description) ? data.description[currentSlide] : data.description;
                 description.style.opacity = '1';
@@ -1480,6 +1481,9 @@
         // Initialize Carousel & Data
         initCarousel();
         updateProjectInfo();
+        setTimeout(() => {
+            updateCarousel();
+        }, 50);
 
         // Initial Nav Check
         const initialNav = document.getElementById('main-nav');
