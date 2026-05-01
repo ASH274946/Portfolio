@@ -144,12 +144,12 @@
 
         .carousel-web {
             max-width: 145% !important;
-            min-height: 350px !important;
+            min-height: 300px !important;
         }
 
         .carousel-mobile {
             max-width: 270px !important;
-            min-height: 560px !important;
+            min-height: 590px !important;
         }
 
         .sliding-text-row {
@@ -1025,7 +1025,7 @@
                                 class="lg:col-span-5 relative flex flex-col items-center justify-center min-h-[600px] lg:pl-16">
 
                                 <div id="carousel-wrapper"
-                                    class="relative carousel-mobile transition-all duration-500 w-full flex items-center justify-center">
+                                    class="relative carousel-mobile w-full flex items-center justify-center">
                                     <!-- Navigation Arrows - Moved inside wrapper -->
                                     <button onclick="prevSlide()"
                                         class="absolute left-[-65px] z-50 p-1 text-white/50 hover:text-white hover:scale-125 transition-all text-4xl material-symbols-outlined hover:[text-shadow:0_0_15px_rgba(255,0,0,0.8)] duration-300">
@@ -1305,7 +1305,7 @@
             updateDropdownUI();
             updateProjectInfo();
             initCarousel();
-            
+
             // Allow CSS to register the hidden initial state before animating
             setTimeout(() => {
                 updateCarousel();
