@@ -112,9 +112,12 @@
             width: 100%;
             opacity: 1;
         }
-        .nav-link:hover {
+        .nav-link:hover, .nav-link.active-section {
             text-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
             background: radial-gradient(circle, rgba(255,0,0,0.05) 0%, transparent 70%);
+        }
+        .nav-link.active-section {
+            color: #FF0000 !important;
         }
         .marquee-text-shadow {
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
@@ -1196,6 +1199,30 @@
             projectsRights.forEach(el => {
                 el.style.opacity = '1';
                 el.style.transform = 'none';
+            });
+
+            // 6. Active Nav Link Update
+            const navLinks = document.querySelectorAll('.nav-link');
+            let currentId = '';
+
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#') && href.length > 1) {
+                    const section = document.getElementById(href.substring(1));
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            currentId = section.getAttribute('id');
+                        }
+                    }
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active-section');
+                if (currentId && link.getAttribute('href') === `#${currentId}`) {
+                    link.classList.add('active-section');
+                }
             });
         });
 
